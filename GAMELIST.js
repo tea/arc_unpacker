@@ -3620,7 +3620,15 @@ var games = [
   vndb: 22899,
   fmt: {archives: ['warc'], gfx: ['s25'], audio: ['ogg', 'ogv'], video: ['mpg', 'wmv']},
   args: ['--dec=shiina-rio/warc --plugin=nukitashi']},
-  
+
+{ dev: 'Qruppo',
+  date: '2019-07-26',
+  title: 'Nukige Mitai na Shima ni Sunderu Watashi wa Dou Surya Ii Desu ka? 2',
+  title_orig: '抜きゲーみたいな島に住んでる貧乳はどうすりゃいいですか？ 2',
+  vndb: 23741,
+  fmt: {archives: ['warc'], gfx: ['s25'], audio: ['ogg', 'ogv'], video: ['mpg', 'wmv']},
+  args: ['--dec=shiina-rio/warc --plugin=nukitashi2']},
+
 { dev: 'Liar-soft',
   date: '2012-03-30',
   title: 'Okujou no Yurirei-san',
