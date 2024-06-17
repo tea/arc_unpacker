@@ -41,4 +41,5 @@ static void do_test(const std::string &input_path)
 TEST_CASE("ISM ISA archives", "[dec]")
 {
     do_test("test.isa");
+    do_test("testv1.isa");
 }
