@@ -38,7 +38,11 @@ io::path io::get_program_path()
 
 io::path io::get_assets_dir_path()
 {
-    auto dir = program_path.parent();
+    io::path dir;
+    if (std::getenv("_ARC_UNPACKER_TESTS"))
+        dir = program_path;
+    else
+        dir = io::path("/usr/share/arc_unpacker");
     do
     {
         const auto path = dir / "etc";
