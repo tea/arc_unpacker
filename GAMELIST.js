@@ -1791,6 +1791,14 @@ var games = [
   fmt: {archives: ['isa'], gfx: ['isg'], audio: ['midi', 'wav']},
   args: ['--dec=ism/isa']},
 
+{ dev: 'Jellyfish',
+  date: '2011-06-10',
+  title: 'sisters ~Natsu no Saigo no Hi~',
+  title_orig: 'sisters～夏の最後の日～',
+  vndb: 3896,
+  fmt: {archives: ['isa']},
+  args: ['--dec=ism/isa']},
+
 { dev: 'Applique',
   date: '2012-09-28',
   title: 'Re:birth Colony -Lost Azurite-',

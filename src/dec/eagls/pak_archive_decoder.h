@@ -18,6 +18,7 @@
 #pragma once
 
 #include "dec/base_archive_decoder.h"
+#include <limits>
 
 namespace au {
 namespace dec {
