@@ -42,12 +42,14 @@ bool ArcPulltopArchiveDecoder::is_recognized_impl(io::File &input_file) const
     for (const auto i : algo::range(file_count - 1))
     {
         input_file.stream.skip(8);
-        while (true)
+        for(int i = 0; ; i++)
         {
             const auto c1 = input_file.stream.read<u8>();
             const auto c2 = input_file.stream.read<u8>();
             if (!c1 && !c2)
                 break;
+            if (i > 1024)
+                return false;
         }
     }
     const auto last_file_offset
