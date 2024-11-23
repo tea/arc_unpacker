@@ -20,6 +20,7 @@
 #include <boost/filesystem/path.hpp>
 #include <memory>
 #include <string>
+#include <vector>
 #include "logger.h"
 
 namespace au {
