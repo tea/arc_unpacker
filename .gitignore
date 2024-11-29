@@ -2,3 +2,5 @@
 *.so
 *~
 /build
+/.vs
+/out/build

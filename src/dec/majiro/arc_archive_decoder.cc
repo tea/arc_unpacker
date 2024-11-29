@@ -42,10 +42,11 @@ std::unique_ptr<dec::ArchiveMeta> ArcArchiveDecoder::read_meta_impl(
     const auto names_offset = input_file.stream.read_le<u32>();
     const auto data_offset = input_file.stream.read_le<u32>();
 
-    if (version != 2 && version != 3)
+    if (version != 1 && version != 2 && version != 3)
         throw err::UnsupportedVersionError(version);
 
     auto meta = std::make_unique<ArchiveMeta>();
+    PlainArchiveEntry* last_entry = nullptr;
     for (const auto i : algo::range(file_count))
     {
         auto entry = std::make_unique<PlainArchiveEntry>();
@@ -53,8 +54,31 @@ std::unique_ptr<dec::ArchiveMeta> ArcArchiveDecoder::read_meta_impl(
             ? input_file.stream.read_le<u64>()
             : input_file.stream.read_le<u32>();
         entry->offset = input_file.stream.read_le<u32>();
-        entry->size = input_file.stream.read_le<u32>();
+        if (version > 1)
+        {
+            entry->size = input_file.stream.read_le<u32>();
+        }
+        else if (last_entry)
+        {
+            if (last_entry->offset > entry->offset)
+                throw err::BadDataOffsetError();
+            last_entry->size = entry->offset - last_entry->offset;
+        }
+        last_entry = entry.get();
+
         meta->entries.push_back(std::move(entry));
+    }
+
+    if (version == 1)
+    {
+        input_file.stream.skip(4);
+        const auto eof_offset = input_file.stream.read_le<u32>();
+        if (last_entry)
+        {
+            if (last_entry->offset > eof_offset)
+                throw err::BadDataOffsetError();
+            last_entry->size = eof_offset - last_entry->offset;
+        }
     }
 
     input_file.stream.seek(names_offset);
